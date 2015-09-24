@@ -39,7 +39,7 @@ function createServer(){
         $wsServer = new OriginCheck($wsServer, $config['allowedOrigins']);
     }
 
-    $server = MgRTC\Server::factory(new HttpServer($wsServer), $config['port'],'127.0.0.1');
+    $server = MgRTC\Server::factory(new HttpServer($wsServer), $config['port'],'104.197.28.131');
 }
 
 /**
