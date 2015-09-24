@@ -75,8 +75,8 @@ $command = isset ($argv[1])? $argv[1] : 'execute';
 
 //Deamon igniter
 Daemon::getInstance()->run(array(
-    'daemon_name'   => 'mg-chat-server',
+    'daemon_name'   => 'pwn-chat-server',
     'run'           => 'onRun',
     'stop'          => 'onStop',
-    'pid_file'      => __DIR__ . '/mg-chat-server.pid'
+    'pid_file'      => __DIR__ . '/pwn-chat-server.pid'
 ),$command);

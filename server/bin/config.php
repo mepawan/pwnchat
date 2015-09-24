@@ -13,7 +13,7 @@ $config = array(
         'dir'           => '/data/projects/magnoliyan/rtc/trunk/source/client/demos/wordpress'
     ),
     'operators'         => null,
-    'allowDuplicates'   => true,
+    'allowDuplicates'   => false,
     'rooms'             => array(
         1   => array(
             'authAdapter'   => 'MgRTC\Session\AuthSimple',
