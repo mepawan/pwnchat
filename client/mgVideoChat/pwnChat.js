@@ -97,7 +97,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
         //get relative path
         $('script').each(function(){
             var src = $(this).attr('src');
-            var suffix = "mgVideoChat-";
+            var suffix = "pwnChat-";
             if(src && src.indexOf(suffix, this.length - suffix.length) !== -1){
                 self.config.dir = src.replace(/\\/g, '/').replace(/\/[^\/]*\/?$/, '');
                 //try non min version
