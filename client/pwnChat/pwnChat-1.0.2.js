@@ -1,9 +1,10 @@
 /**
- * mgVideoChat
+ * pwnChat
  *
- * @author Milan Rukavina
+ * @author Pawan Developers
  * @version 1.0
- * @copyright magnoliyan
+ * @copyright pawan
+ * @auther_email pawan.developers@gmail.com
  */
 
 ;
@@ -60,25 +61,25 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     var config = {};
 
     /**
-     * mgVideoChat constructor
+     * pwnChat constructor
      *
      * @param {object} elem
      * @param {object} options
-     * @return {mgVideoChat}
+     * @return {pwnChat}
      */
-    var mgVideoChat = function( elem, options ){
+    var pwnChat = function( elem, options ){
         this.version = '1';
         this.elem = elem;
         this.$elem = $(elem);
         this.$connectionsPanel = null;
         this.options = options;
-        this.metadata = this.$elem.data("mgVideoChat-options" );
+        this.metadata = this.$elem.data("pwnChat-options" );
         this.config = $.extend({}, defaults, this.options);
         config = this.config;
         rtc.init(this.config.rtc);
         this.fixPath();
         this.init();
-        this.$elem.data("mgVideoChat-instance",this);
+        this.$elem.data("pwnChat-instance",this);
         this.chatId = null;
         this.videoId = null;
         this.videoInvitedId = null;
@@ -89,7 +90,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     /**
      * Fix relative paths
      */
-    mgVideoChat.prototype.fixPath = function(){
+    pwnChat.prototype.fixPath = function(){
         if(this.config.dir != '{rel}'){
             return ;
         }
@@ -97,7 +98,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
         //get relative path
         $('script').each(function(){
             var src = $(this).attr('src');
-            var suffix = "mgVideoChat-";
+            var suffix = "pwnChat-";
             if(src && src.indexOf(suffix, this.length - suffix.length) !== -1){
                 self.config.dir = src.replace(/\\/g, '/').replace(/\/[^\/]*\/?$/, '');
                 //try non min version
@@ -123,7 +124,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     /**
      * Init plugin - update dom, set properties
      */
-    mgVideoChat.prototype.init = function(){
+    pwnChat.prototype.init = function(){
         var self = this;
         //load and parse templetes - first conns tpl
         this.loadTplByName('tplConnections', function(connTpl){
@@ -167,7 +168,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     /**
      * Init DOM
      */
-    mgVideoChat.prototype.initDom = function(){
+    pwnChat.prototype.initDom = function(){
         var self = this;        
         //login button
         self.$loginPanel.find('#loginButton').click(function(){
@@ -186,7 +187,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
         var onLogin = function(){
             if(self.$loginDialog.find('#userName').val()){
                 //set cookie for the server
-                self.setCookie('mgVideoChatSimple', self.$loginDialog.find('#userName').val(), 30, window.location.host);
+                self.setCookie('pwnChatSimple', self.$loginDialog.find('#userName').val(), 30, window.location.host);
                 self.$loginDialog.modal('hide');
                 //reload to use new cookie
                 window.location.reload();
@@ -235,7 +236,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
         
     };
 
-    mgVideoChat.prototype.setCookie = function( cookieName, cookieValue, days, domain){
+    pwnChat.prototype.setCookie = function( cookieName, cookieValue, days, domain){
         var domainString = domain ? ("; domain=" + domain) : '';
         document.cookie = cookieName + "=" + encodeURIComponent(cookieValue) + "; max-age=" + (60 * 60 * 24 * days) + "; path=/" + domainString;
     };
@@ -248,7 +249,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
      * @param {string} messageType success, warning, danger
      * @param {int} expire in seconds
      */
-    mgVideoChat.prototype.message = function(messageText, messageType, expire) {
+    pwnChat.prototype.message = function(messageText, messageType, expire) {
         if(messageTimeout){
             window.clearTimeout(messageTimeout);
         }
@@ -276,25 +277,25 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
      * @param {string} message
      *
      */
-    mgVideoChat.prototype.debug = function(message){
+    pwnChat.prototype.debug = function(message){
         if(this.config.debug){
             console.log(message);
         }
     };
 
-    mgVideoChat.prototype.onConnected = function(){
+    pwnChat.prototype.onConnected = function(){
         this.$loginPanel.show();
     };
 
-    mgVideoChat.prototype.onDisconnected = function(){
+    pwnChat.prototype.onDisconnected = function(){
         this.disableChat();
     };
 
-    mgVideoChat.prototype.onLogged = function(){
+    pwnChat.prototype.onLogged = function(){
         this.$loginPanel.hide();        
     };
 
-    mgVideoChat.prototype.onConnectionClose = function(connectionId){
+    pwnChat.prototype.onConnectionClose = function(connectionId){
         this.$connectionsPanel.find("#connection_" + connectionId).remove();
         this.disableChat(connectionId);
         if(this.videoId == connectionId){
@@ -306,7 +307,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
         delete rtc.connections[connectionId];
     };
 
-    mgVideoChat.prototype.onVideoOpen = function(connectionId){
+    pwnChat.prototype.onVideoOpen = function(connectionId){
         this.videoId = connectionId;
         this.$callPanel.find('.panel-title').text('Video Call with ' + rtc.connections[connectionId]['data']['userData']['name']);
         this.$callPanel.show();
@@ -314,7 +315,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
         this.renderConnections();
     };
 
-    mgVideoChat.prototype.onVideoClose = function(){
+    pwnChat.prototype.onVideoClose = function(){
         var self = this;
         this.videoId = null;
         self.$elem.find("#localVideo").attr("src","");
@@ -325,19 +326,19 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
         this.renderConnections();
     };
 
-    mgVideoChat.prototype.inviteStart = function(connectionId){
+    pwnChat.prototype.inviteStart = function(connectionId){
         this.videoAnswerDialog(connectionId);
         this.videoInvitedId = connectionId;
         this.callRing(false);
     };
 
-    mgVideoChat.prototype.inviteStop = function(){
+    pwnChat.prototype.inviteStop = function(){
         this.$answerDialog.modal('hide');
         this.videoInvitedId = null;
         this.callRing(true);
     };
 
-    mgVideoChat.prototype.videoAnswerDialog = function(connectionId){
+    pwnChat.prototype.videoAnswerDialog = function(connectionId){
         var self = this;
         var userData = rtc.connections[connectionId].data.userData;
         self.$answerDialog.data('caller_id',connectionId);
@@ -348,7 +349,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
         self.$answerDialog.modal('show');
     };
 
-    mgVideoChat.prototype.callRing = function(stop){
+    pwnChat.prototype.callRing = function(stop){
         var audio = this.$elem.find("#ringSound").get(0);
         if(stop){
             audio.pause();
@@ -362,7 +363,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
      * Write to console if config.debug
      *
      */
-    mgVideoChat.prototype.initRtc = function(){
+    pwnChat.prototype.initRtc = function(){
         var self = this;
         //rtc events
         rtc.on('connected', function(){
@@ -487,7 +488,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     /**
      * Render Connections (Peers)
      */
-    mgVideoChat.prototype.renderConnections = function(){
+    pwnChat.prototype.renderConnections = function(){
         var self = this;
         self.debug('connections');self.debug(rtc.connections);
         //load and parse templetes - first conns tpl
@@ -508,7 +509,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     /**
      * Render/Update an connection
      */
-    mgVideoChat.prototype.renderConnection = function(connectionId){
+    pwnChat.prototype.renderConnection = function(connectionId){
         var self = this;
         this.getConnectionElement(connectionId, function($connEl){
             //conn exists
@@ -527,7 +528,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     /**
      * Generate and return on callback a connection DOM
      */
-    mgVideoChat.prototype.getConnectionElement = function(connectionId, callback){
+    pwnChat.prototype.getConnectionElement = function(connectionId, callback){
         var self = this;
         if(!rtc.connections[connectionId]){
             return false;
@@ -592,7 +593,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
      * @param {int} chatId
      * @returns {undefined}
      */
-    mgVideoChat.prototype.getChatDiv = function(chatId){
+    pwnChat.prototype.getChatDiv = function(chatId){
         var self = this;
         //get active chat
         var chat = this.$chatPanel.find('#chat_' + chatId);
@@ -622,7 +623,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
      * @param {int} chatId
      * @returns {undefined}
      */
-    mgVideoChat.prototype.disableChat = function(chatId){
+    pwnChat.prototype.disableChat = function(chatId){
         //disable all
         if(!chatId){
             this.$chatPanel.find('.form-control').attr('disabled','disabled');
@@ -638,7 +639,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
      * @param {int} chatId
      * @returns {undefined}
      */
-    mgVideoChat.prototype.setChat = function(chatId){
+    pwnChat.prototype.setChat = function(chatId){
         this.chatId = chatId;      
         //hide all chats
         this.$chatPanel.find('.chat').hide();
@@ -656,7 +657,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     /**
      * Process chat message
      */
-    mgVideoChat.prototype.parseChatMessageText = function(messageText){
+    pwnChat.prototype.parseChatMessageText = function(messageText){
         function nl2br (str, is_xhtml) {
             var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
             return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
@@ -690,7 +691,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
      * @param {string} messageText
      * @returns {undefined}
      */
-    mgVideoChat.prototype.renderChatMessage = function(chatId, fromId, messageText){
+    pwnChat.prototype.renderChatMessage = function(chatId, fromId, messageText){
         var self = this;
         var chat = this.getChatDiv(chatId);
         this.loadTplByName('tplChat',function(tpl){
@@ -718,7 +719,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
      * John Resig - http://ejohn.org/ - MIT Licensed
      *
      */
-    mgVideoChat.prototype.tmpl = function tmpl(str, data){
+    pwnChat.prototype.tmpl = function tmpl(str, data){
         // Figure out if we're getting a template, or if we need to
         // load the template - and be sure to cache the result.
         var fn = !/\W/.test(str) ?
@@ -753,14 +754,14 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     /**
      * Load template by name
      */
-    mgVideoChat.prototype.loadTplByName = function(tplName, callback){
+    pwnChat.prototype.loadTplByName = function(tplName, callback){
         this.loadTpl(this.config.dir + this.config[tplName] + '?v=' + this.version, callback);
     };
 
     /**
      * Load template
      */
-    mgVideoChat.prototype.loadTpl = function(url,callback){
+    pwnChat.prototype.loadTpl = function(url,callback){
         if(tpls[url] == null){
             $.get(url, function(data){
                 tpls[url] = data;
@@ -784,17 +785,17 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
      * @param {object} params
      * @return {jQuery}
      */
-    $.fn.mgVideoChat = function(options, params) {
+    $.fn.pwnChat = function(options, params) {
         //just call existing instance
         if(options === 'methodName'){
-            var customizer = $(this).data("mgVideoChat-instance");
+            var customizer = $(this).data("pwnChat-instance");
             if(customizer){
                 return customizer.methodName(params);
             }
         }        
         else{
             this.each(function() {
-                return new mgVideoChat(this, options);
+                return new pwnChat(this, options);
             });
         }
     };

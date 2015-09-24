@@ -14,14 +14,14 @@ class AuthSimple extends AuthBase implements AuthInterface {
      */
     public function authUser(ConnectionInterface $conn, array $cookies) {
         //$this->debug($cookies);
-        if(!isset ($cookies['mgVideoChatSimple']) || !$cookies['mgVideoChatSimple']){
+        if(!isset ($cookies['pwnChatSimple']) || !$cookies['pwnChatSimple']){
             return null;
         }
         return array(
             'provider'      => 'simple',
             'id'            => $conn->resourceId,
             'email'         => '',
-            'name'          => urldecode($cookies['mgVideoChatSimple'])
+            'name'          => urldecode($cookies['pwnChatSimple'])
         );
     }
 }

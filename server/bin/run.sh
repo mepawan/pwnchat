@@ -3,10 +3,10 @@ COMMAND=$1
 #check if running
 if ps aux | grep [c]hat-server > /dev/null
 then
-    echo "[MgVideoChat] Running"
+    echo "[pwnChat] Running"
     RUNNING="yes"
 else
-    echo "[MgVideoChat] Not running"
+    echo "[pwnChat] Not running"
     RUNNING="no"
 fi
 
@@ -15,13 +15,13 @@ if [ "$COMMAND" = "stop" ]
 then
     if [ $RUNNING = "yes" ]
     then
-        echo "[MgVideoChat] stopping"
+        echo "[pwnChat] stopping"
         pkill -9 -f chat-server
     fi
 else
     if [ $RUNNING = "no" ]
     then
-        echo "[MgVideoChat] start"
+        echo "[pwnChat] start"
         nohup php chat-server.php 0<&- &> mg-chat-server.log &
     fi
 fi
