@@ -1,0 +1,11 @@
+.callStatus{
+	bottom: 3px;
+    position: absolute;
+    right: 6px;
+}
+.callStatus .cmdBtn{
+	padding: 0 4px;
+}
+#connections .connectionItem {
+	position:relative;
+}
