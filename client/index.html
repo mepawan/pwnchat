@@ -4,25 +4,25 @@
         <title>Magnoliyan Video Chat</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">        
-        <link rel="stylesheet" href="./mgVideoChat/mgVideoChat-1.0.2.css">
+        <link rel="stylesheet" href="./pwnChat/pwnChat.css">
     </head>
     <body>
         <div class="container">
-            <h1>MgVChat <small>Simple</small></h1>
+            <h1>pwnChat <small>beta</small></h1>
             <div class="alert alert-info" role="alert">
                 If no one else is in the room, please open the same page in other tab to do self-test.
             </div>
         </div>
-        <div id="mgVideoChat"></div>
+        <div id="pwnChat"></div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
         <!-- Video Chat -->
-        <script src="./mgVideoChat/mgVideoChat-1.0.2-min.js"></script>
+        <script src="./pwnChat/pwnChat.js"></script>
 
         <script>
             $(document).ready(function(){ 
-                $('#mgVideoChat').mgVideoChat({
+                $('#pwnChat').mgVideoChat({
                     wsURL: 'ws://104.197.28.131:8080?room=1'
                 });
             });
