@@ -25,7 +25,7 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
     var defaults =
     {
         wsURL: 'ws://localhost:8080',
-        dir: '{rel}',
+        dir: 'pwnChat',
         tplMain:'/tpls/main.html',
         tplConnections:'/tpls/connections.html',
         tplConnection:'/tpls/connection.html',
@@ -97,17 +97,17 @@ window.RTCIceCandidate = window.mozRTCIceCandidate || window.webkitRTCIceCandida
         //get relative path
         $('script').each(function(){
             var src = $(this).attr('src');
-            var suffix = "pwnChat-";
+            var suffix = "mgVideoChat-";
             if(src && src.indexOf(suffix, this.length - suffix.length) !== -1){
                 self.config.dir = src.replace(/\\/g, '/').replace(/\/[^\/]*\/?$/, '');
                 //try non min version
-                var regex = /mgVideoChat\-(\d*\.\d*\.\d*)\.js/gi;
+                var regex = /pwnChat\-(\d*\.\d*\.\d*)\.js/gi;
                 var match = regex.exec(src);
                 if(match && match[1]){
                     self.version = match[1];
                 }
                 else{
-                    regex = /mgVideoChat\-(\d*\.\d*\.\d*)\-min\.js/gi;
+                    regex = /pwnChat\-(\d*\.\d*\.\d*)\-min\.js/gi;
                     match = regex.exec(src);
                     if(match && match[1]){
                         self.version = match[1];
