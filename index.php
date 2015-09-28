@@ -47,7 +47,7 @@
 			?>
 			
 			<form class="form-signin" method="post">
-				<h2><span style="font-size:13px; font-weight:bold;">Write Us</span></h2>
+				<h2><span style="font-size:13px; font-weight:bold;">Write Us here  OR email : pawan.developers@gmail.com </span></h2>
 				<label class="sr-only1" for="inputEmail">Email</label>
 				<input type="email" name="email" autofocus="" required="" placeholder="Email" class="form-control" id="inputEmail">
 				<p></p>
