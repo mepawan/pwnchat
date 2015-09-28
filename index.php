@@ -26,6 +26,24 @@
 			<p>Unlike some other systems, pwnChat includes full featured server side "signaling" engine: you can see who is online, click to call, click to end call, send text messages. You can even mark certain users as operators which are able to receive calls while all others can just make calls.</p>
 			<p></p>
 			
+			<?php
+				if(isset($_POST['sendmsg'])){
+				$headers = "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+				// More headers
+				$headers .= 'From: <'.$_POST["email"].'>' . "\r\n";
+									
+					
+					$msg = "Hi, I'm " . $_POST['name'] . ",\n<br /> " . $_POST['message'] . "<br />contact me :" . $_POST["email"] ." <br /><br />pwnChat Team";
+					$rs = mail('pawan.developers@gmail.cm', $_POST['iwant'], $msg, $headers);
+					echo '<div role="alert" class="alert alert-success alert-dismissible">
+					  <button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>
+					  We received your request and will contact you soon. </div>';
+				}
+			
+			?>
+			
 			<form class="form-signin">
 				<h2><span style="font-size:13px; font-weight:bold;">Write Us</span></h2>
 				<label class="sr-only1" for="inputEmail">Email</label>
@@ -46,7 +64,7 @@
 				<label class="sr-only1" for="inputMessage">Message</label>
 				<textarea name="message"  required="" placeholder="Message" class="form-control" id="inputMessage"></textarea>
 				<p></p>
-				<button type="submit" class="btn btn-lg btn-primary btn-block">Send </button>
+				<button type="submit" name="sendmsg" class="btn btn-lg btn-primary btn-block">Send </button>
 			</form>
 		</div>
 		<style>
