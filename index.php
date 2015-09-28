@@ -44,7 +44,7 @@
 			
 			?>
 			
-			<form class="form-signin">
+			<form class="form-signin" method="post">
 				<h2><span style="font-size:13px; font-weight:bold;">Write Us</span></h2>
 				<label class="sr-only1" for="inputEmail">Email</label>
 				<input type="email" name="email" autofocus="" required="" placeholder="Email" class="form-control" id="inputEmail">
