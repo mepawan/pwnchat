@@ -1,2 +1,2 @@
 # pwnchat
-simple chat application
+text/audio/video chat application using react and websocket
